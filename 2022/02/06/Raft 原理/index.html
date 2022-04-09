@@ -27,14 +27,15 @@
 <meta property="og:site_name" content="Taotie&#39;s Blog">
 <meta property="og:description" content="实现分布式共识的协议.">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/raft-consensus-module-log.png">
 <meta property="og:image" content="http://example.com/images/%E5%A4%9A%E4%B8%AA%E5%88%86%E5%8C%BA%E6%97%A5%E5%BF%97%E5%A4%8D%E5%88%B6.jpeg">
 <meta property="article:published_time" content="2022-02-06T08:30:16.000Z">
-<meta property="article:modified_time" content="2022-04-09T08:12:01.473Z">
+<meta property="article:modified_time" content="2022-04-09T13:55:25.650Z">
 <meta property="article:author" content="Taotie">
 <meta property="article:tag" content="Raft">
 <meta property="article:tag" content="分布式">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/%E5%A4%9A%E4%B8%AA%E5%88%86%E5%8C%BA%E6%97%A5%E5%BF%97%E5%A4%8D%E5%88%B6.jpeg">
+<meta name="twitter:image" content="http://example.com/images/raft-consensus-module-log.png">
 
 <link rel="canonical" href="http://example.com/2022/02/06/Raft%20%E5%8E%9F%E7%90%86/">
 
@@ -210,7 +211,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>914</span>
+              <span>1.4k</span>
             </span>
             <div class="post-description">实现分布式共识的协议.</div>
 
@@ -223,8 +224,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Raft - 实现分布式共识的协议.</p>
+        <p>Raft - 实现分布式共识的协议。在平衡可用性和一致性中，Raft是为<strong>一致性</strong>而设计的，牺牲了可用性。Raft不是为高吞吐量、细粒度服务而设计的，每个客户端请求会触发很多工作：Raft副本之间通信、复制、持久化等。Raft更适合粗粒度的分布式原语，比如：实现一个锁服务器；在分布式系统中复制关键配置数据；为更高级别的协议选举领导者等。</p>
 <h1 id="什么是分布式共识"><a href="#什么是分布式共识" class="headerlink" title="什么是分布式共识"></a>什么是分布式共识</h1><p>当客户端发送数据给一个数据库服务器进行更新，很容易达成共识。当发送给多个数据库服务器进行更新时，如何达成共识？Raft用来解决分布式共识问题的。</p>
+<p>解决跨多个服务器复制确定性状态机的问题。组成集群的服务器副本必须相互通信，以正确复制状态。所有的状态机都按照相同的步骤执行，从客户端请求获取相同的输入，并执行相同的状态转换。<br><img src="/images/raft-consensus-module-log.png" alt="多网络分区"></p>
 <h1 id="Raft工作原理"><a href="#Raft工作原理" class="headerlink" title="Raft工作原理"></a>Raft工作原理</h1><h2 id="leader选举"><a href="#leader选举" class="headerlink" title="leader选举"></a>leader选举</h2><ul>
 <li><p>三个状态</p>
 <ul>
@@ -264,6 +266,14 @@
 <li>网络分区需要修复，较高的选举任期留下，较低的选举任期的节点退出，回滚其未提交的条目且匹配新leader的日志。</li>
 </ol>
 <p><img src="/images/%E5%A4%9A%E4%B8%AA%E5%88%86%E5%8C%BA%E6%97%A5%E5%BF%97%E5%A4%8D%E5%88%B6.jpeg" alt="多网络分区"></p>
+<h3 id="Raft的容错和CAP理论"><a href="#Raft的容错和CAP理论" class="headerlink" title="Raft的容错和CAP理论"></a>Raft的容错和CAP理论</h3><p>发生故障类型：</p>
+<ul>
+<li>服务器崩溃：不能提供服务，过段时间恢复。</li>
+<li>网络分区：其中一台或多台服务器与其他服务器和&#x2F;或客户端断开连接。</li>
+</ul>
+<p>在2N+1个服务器的情况下，它可以容忍N台服务器故障。</p>
+<hr>
+<p>不妨一读：<br>Raft在线可视化：<a target="_blank" rel="noopener" href="http://www.kailing.pub/raft">http://www.kailing.pub/raft</a><br>Raft基于Go的实现：<a target="_blank" rel="noopener" href="https://eli.thegreenplace.net/2020/implementing-raft-part-1-elections/">https://eli.thegreenplace.net/2020/implementing-raft-part-1-elections/</a></p>
 
     </div>
 
@@ -300,7 +310,10 @@
     <a href="/2017/04/22/Hexo-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E5%88%97%EF%BC%9A%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%AF%87/" rel="prev" title="Hexo 搭建个人博客系列：后台管理篇">
       <i class="fa fa-chevron-left"></i> Hexo 搭建个人博客系列：后台管理篇
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/02/14/Go%E7%9A%84%E5%AD%A6%E4%B9%A0/" rel="next" title="Go的学习">
+      Go的学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -359,7 +372,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%86%E5%B8%83%E5%BC%8F%E5%85%B1%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">什么是分布式共识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Raft%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">Raft工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#leader%E9%80%89%E4%B8%BE"><span class="nav-number">2.1.</span> <span class="nav-text">leader选举</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E5%A4%8D%E5%88%B6"><span class="nav-number">2.2.</span> <span class="nav-text">日志复制</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%86%E5%B8%83%E5%BC%8F%E5%85%B1%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">什么是分布式共识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Raft%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">Raft工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#leader%E9%80%89%E4%B8%BE"><span class="nav-number">2.1.</span> <span class="nav-text">leader选举</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E5%A4%8D%E5%88%B6"><span class="nav-number">2.2.</span> <span class="nav-text">日志复制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Raft%E7%9A%84%E5%AE%B9%E9%94%99%E5%92%8CCAP%E7%90%86%E8%AE%BA"><span class="nav-number">2.2.1.</span> <span class="nav-text">Raft的容错和CAP理论</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -373,20 +386,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
