@@ -240,7 +240,7 @@
 <h1 id="踩坑7：Hexo-admin"><a href="#踩坑7：Hexo-admin" class="headerlink" title="踩坑7：Hexo-admin"></a>踩坑7：Hexo-admin</h1><p>admin每次安装好后，点进localhost:4000&#x2F;admin里，无法编辑文章。报错：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Function yaml.safeLoad is removed in js-yaml 4. Use yaml.load instead, which is now safe by default。</span><br></pre></td></tr></table></figure>
 <p>原因： yaml.safeLoad已经弃用，用yaml.load代替。</p>
-<p>解决： 根据错误描述，找到 myBlog\node_modules_<a href="mailto:&#104;&#x65;&#x78;&#x6f;&#45;&#97;&#100;&#x6d;&#x69;&#110;&#64;&#x32;&#46;&#51;&#x2e;&#x30;">&#104;&#x65;&#x78;&#x6f;&#45;&#97;&#100;&#x6d;&#x69;&#110;&#64;&#x32;&#46;&#51;&#x2e;&#x30;</a>@hexo-admin\api.js，44行 yaml.safeLoad改为yaml.load</p>
+<p>解决： 根据错误描述，找到 myBlog\node_modules_<a href="mailto:&#104;&#x65;&#120;&#111;&#45;&#97;&#100;&#x6d;&#105;&#110;&#x40;&#50;&#46;&#51;&#x2e;&#48;">&#104;&#x65;&#120;&#111;&#45;&#97;&#100;&#x6d;&#105;&#110;&#x40;&#50;&#46;&#51;&#x2e;&#48;</a>@hexo-admin\api.js，44行 yaml.safeLoad改为yaml.load</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var settings = yml.safeLoad(fs.readFileSync(path))</span><br></pre></td></tr></table></figure>
     </div>
 
@@ -353,20 +353,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
