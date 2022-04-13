@@ -220,16 +220,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Go语言的锁"><a href="#Go语言的锁" class="headerlink" title="Go语言的锁"></a>Go语言的锁</h1><p>Go语言提供两类锁：互斥锁（Mutex）和读写锁（RWMutex）。其中读写锁是基于互斥锁实现的。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> RWMutex <span class="keyword">struct</span> &#123;</span><br><span class="line">    w           Mutex  <span class="comment">// held if there are pending writers</span></span><br><span class="line">    writerSem   <span class="type">uint32</span> <span class="comment">// semaphore for writers to wait for completing readers</span></span><br><span class="line">    readerSem   <span class="type">uint32</span> <span class="comment">// semaphore for readers to wait for completing writers</span></span><br><span class="line">    readerCount <span class="type">int32</span>  <span class="comment">// number of pending readers</span></span><br><span class="line">    readerWait  <span class="type">int32</span>  <span class="comment">// number of departing readers</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        <h1 id="Go语言的锁"><a href="#Go语言的锁" class="headerlink" title="Go语言的锁"></a>Go语言的锁</h1><p>Go语言提供两类锁：互斥锁（Mutex）和读写锁（RWMutex）。其中读写锁是基于互斥锁实现的。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> RWMutex <span class="keyword">struct</span> &#123;</span><br><span class="line">    w           Mutex  <span class="comment">// held if there are pending writers</span></span><br><span class="line">    writerSem   <span class="type">uint32</span> <span class="comment">// semaphore for writers to wait for completing readers</span></span><br><span class="line">    readerSem   <span class="type">uint32</span> <span class="comment">// semaphore for readers to wait for completing writers</span></span><br><span class="line">    readerCount <span class="type">int32</span>  <span class="comment">// number of pending readers</span></span><br><span class="line">    readerWait  <span class="type">int32</span>  <span class="comment">// number of departing readers</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="互斥锁的使用"><a href="#互斥锁的使用" class="headerlink" title="互斥锁的使用"></a>互斥锁的使用</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Mutex)</span></span> Lock() <span class="comment">// 加锁</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Mutex)</span></span> Unlock() <span class="comment">// 释放锁</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>当一个互斥锁被Lock之后，任何goroutines试图再Lock这个锁都会被挂起（包括自己，即不可重入锁），直到Unlock。</li>
 <li>Go语言的Mutex不和任何goroutine相关联，所以一个互斥锁被一个goroutine锁住，可以被另一个goroutine解锁Unlock。（这是与thread的线程锁的<strong>区别</strong>）</li>
 </ul>
 <h2 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> RLock() <span class="comment">// 读锁，多个goroutine加读锁</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> RUnlock() <span class="comment">// 写锁，只能一个goroutine加写锁</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> Lock()</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span></span> Unlock()</span><br></pre></td></tr></table></figure>
-
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>锁并不与任何特定goroutine相关联，锁不记录当前是哪个goroutine锁住自己</strong></p>
 <h1 id="Go语言-defer（延迟执行语句）"><a href="#Go语言-defer（延迟执行语句）" class="headerlink" title="Go语言 defer（延迟执行语句）"></a>Go语言 defer（延迟执行语句）</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">defer</span> fmt.Println(<span class="number">1</span>); <span class="comment">// 将defer放入延迟调用栈</span></span><br></pre></td></tr></table></figure>
 <p>后进栈的先执行。当只有一个时，延迟到函数结束时调用。</p>
@@ -344,7 +341,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -357,7 +354,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -447,6 +444,8 @@
 
 
 
+
+  
 
   
 
