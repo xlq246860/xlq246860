@@ -186,12 +186,47 @@
       <div class="post-body">
           <div class="tag-cloud">
             <div class="tag-cloud-title">
-              目前共计 11 个标签
+              目前共计 13 个标签
             </div>
             <div class="tag-cloud-tags">
-              <a href="/tags/Eclipse/" style="font-size: 12px; color: #ccc">Eclipse</a> <a href="/tags/Github/" style="font-size: 30px; color: #111">Github</a> <a href="/tags/Go/" style="font-size: 21px; color: #6f6f6f">Go</a> <a href="/tags/Hexo/" style="font-size: 30px; color: #111">Hexo</a> <a href="/tags/Java/" style="font-size: 12px; color: #ccc">Java</a> <a href="/tags/Raft/" style="font-size: 21px; color: #6f6f6f">Raft</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 21px; color: #6f6f6f">分布式</a> <a href="/tags/%E5%8A%A8%E8%A7%84/" style="font-size: 12px; color: #ccc">动规</a> <a href="/tags/%E6%A0%88/" style="font-size: 12px; color: #ccc">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 12px; color: #ccc">树</a> <a href="/tags/%E9%98%9F%E5%88%97/" style="font-size: 12px; color: #ccc">队列</a>
+              <a href="/tags/Eclipse/" style="font-size: 12px; color: #ccc">Eclipse</a> <a href="/tags/Github/" style="font-size: 30px; color: #111">Github</a> <a href="/tags/Go/" style="font-size: 21px; color: #6f6f6f">Go</a> <a href="/tags/Hexo/" style="font-size: 30px; color: #111">Hexo</a> <a href="/tags/Java/" style="font-size: 12px; color: #ccc">Java</a> <a href="/tags/Raft/" style="font-size: 21px; color: #6f6f6f">Raft</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 21px; color: #6f6f6f">分布式</a> <a href="/tags/%E5%8A%A8%E8%A7%84/" style="font-size: 12px; color: #ccc">动规</a> <a href="/tags/%E6%A0%88/" style="font-size: 12px; color: #ccc">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 21px; color: #6f6f6f">树</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 12px; color: #ccc">递归</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 12px; color: #ccc">链表</a> <a href="/tags/%E9%98%9F%E5%88%97/" style="font-size: 12px; color: #ccc">队列</a>
             </div>
           </div>
+          <script type="text/javascript">
+     var alltags = document.getElementsByClassName('tag-cloud-tags');
+     var tags = alltags[0].getElementsByTagName('a');
+     for (var i = tags.length - 1; i >= 0; i--) {
+       var r=Math.floor(Math.random()*75+130);
+       var g=Math.floor(Math.random()*75+100);
+       var b=Math.floor(Math.random()*75+80);
+       tags[i].style.background = "rgb("+r+","+g+","+b+")";
+     }
+</script>
+
+<style>
+  .tag-cloud-tags{
+    /*font-family: Helvetica, Tahoma, Arial;*/
+    /*font-weight: 100;*/
+    text-align: center;
+    counter-reset: tags;
+  }
+  .tag-cloud-tags a{
+    border-radius: 6px;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin: 8px 5px 0px 0px;
+  }
+  .tag-cloud-tags a:before{
+    content: "🔖";
+  }
+
+  .tag-cloud-tags a:hover{
+     box-shadow: 0px 5px 15px 0px rgba(0,0,0,.4);
+     transform: scale(1.1);
+     /*box-shadow: 10px 10px 15px 2px rgba(0,0,0,.12), 0 0 6px 0 rgba(104, 104, 105, 0.1);*/
+     transition-duration: 0.15s;
+  }
+</style> <!-- new add 彩色标签页-->	
         
       </div>
       
@@ -268,7 +303,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -281,7 +316,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
