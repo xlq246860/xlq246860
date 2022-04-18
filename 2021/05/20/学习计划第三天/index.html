@@ -20,24 +20,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="实现分布式共识的协议.">
+  <meta name="description" content="三数之和；打家劫舍.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Raft 原理">
-<meta property="og:url" content="http://example.com/2022/02/06/Raft%20%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:title" content="学习计划第三天">
+<meta property="og:url" content="http://example.com/2021/05/20/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%B8%89%E5%A4%A9/index.html">
 <meta property="og:site_name" content="Taotie&#39;s Blog">
-<meta property="og:description" content="实现分布式共识的协议.">
+<meta property="og:description" content="三数之和；打家劫舍.">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/raft-consensus-module-log.png">
-<meta property="og:image" content="http://example.com/images/多个分区日志复制.jpeg">
-<meta property="article:published_time" content="2022-02-06T08:30:16.000Z">
-<meta property="article:modified_time" content="2022-04-09T13:55:25.650Z">
+<meta property="article:published_time" content="2021-05-20T01:48:51.000Z">
+<meta property="article:modified_time" content="2022-04-18T02:26:51.909Z">
 <meta property="article:author" content="Taotie">
-<meta property="article:tag" content="Raft">
-<meta property="article:tag" content="分布式">
+<meta property="article:tag" content="遍历">
+<meta property="article:tag" content="动规">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/raft-consensus-module-log.png">
 
-<link rel="canonical" href="http://example.com/2022/02/06/Raft%20%E5%8E%9F%E7%90%86/">
+<link rel="canonical" href="http://example.com/2021/05/20/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%B8%89%E5%A4%A9/">
 
 
 <script id="page-configurations">
@@ -50,7 +47,7 @@
   };
 </script>
 
-  <title>Raft 原理 | Taotie's Blog</title>
+  <title>学习计划第三天 | Taotie's Blog</title>
   
 
 
@@ -170,7 +167,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/06/Raft%20%E5%8E%9F%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/20/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%B8%89%E5%A4%A9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/touxiang.jpg">
@@ -183,7 +180,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Raft 原理
+          学习计划第三天
         </h1>
 
         <div class="post-meta">
@@ -193,7 +190,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-02-06 16:30:16" itemprop="dateCreated datePublished" datetime="2022-02-06T16:30:16+08:00">2022-02-06</time>
+              <time title="创建时间：2021-05-20 09:48:51" itemprop="dateCreated datePublished" datetime="2021-05-20T09:48:51+08:00">2021-05-20</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -201,7 +198,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
             </span>
 
@@ -211,9 +208,9 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
+              <span>885</span>
             </span>
-            <div class="post-description">实现分布式共识的协议.</div>
+            <div class="post-description">三数之和；打家劫舍.</div>
 
         </div>
       </header>
@@ -224,56 +221,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Raft - 实现分布式共识的协议。在平衡可用性和一致性中，Raft是为<strong>一致性</strong>而设计的，牺牲了可用性。Raft不是为高吞吐量、细粒度服务而设计的，每个客户端请求会触发很多工作：Raft副本之间通信、复制、持久化等。Raft更适合粗粒度的分布式原语，比如：实现一个锁服务器；在分布式系统中复制关键配置数据；为更高级别的协议选举领导者等。</p>
-<h1 id="什么是分布式共识"><a href="#什么是分布式共识" class="headerlink" title="什么是分布式共识"></a>什么是分布式共识</h1><p>当客户端发送数据给一个数据库服务器进行更新，很容易达成共识。当发送给多个数据库服务器进行更新时，如何达成共识？Raft用来解决分布式共识问题的。</p>
-<p>解决跨多个服务器复制确定性状态机的问题。组成集群的服务器副本必须相互通信，以正确复制状态。所有的状态机都按照相同的步骤执行，从客户端请求获取相同的输入，并执行相同的状态转换。<br><img src="/images/raft-consensus-module-log.png" alt="多网络分区"></p>
-<h1 id="Raft工作原理"><a href="#Raft工作原理" class="headerlink" title="Raft工作原理"></a>Raft工作原理</h1><h2 id="leader选举"><a href="#leader选举" class="headerlink" title="leader选举"></a>leader选举</h2><ul>
-<li><p>三个状态</p>
-<ul>
-<li>follower 跟随者状态</li>
-<li>candidate 候选者状态</li>
-<li>leader 领导者状态</li>
+        <h1 id="三数之和"><a href="#三数之和" class="headerlink" title="三数之和"></a>三数之和</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>先进行排序，对有序数组采用遍历的方法遍寻三个数之和满足和为0的条件的情况。</p>
+<h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;len;i++)<br>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=i+<span class="hljs-number">1</span>;j&lt;len;j++)<br>    &#123;<br>        <span class="hljs-keyword">while</span>(k&gt;j)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(nums[j]+nums[k]==(-nums[i]))<br>            &#123;<br>                <span class="hljs-comment">// result</span><br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(nums[j]+nums[k]&lt;(-nums[i]))<br>            &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>            k--;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(k==j) <span class="hljs-comment">// 因为说明j时所有结果均&gt;0，当j++时 ，三数之和只会更大</span><br>        &#123;<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间复杂度：两层循环，O(n^2)。双指针，一个递增一个递减，时间复杂度为O(n)。<br>空间复杂度：O(1)</p>
+<h2 id="进一步"><a href="#进一步" class="headerlink" title="进一步"></a>进一步</h2><ul>
+<li>两数之和，采用HashMap解决</li>
 </ul>
-</li>
-<li><p>两个timeout设置</p>
-<ul>
-<li>election timeout 选举超时：follower随机分配时间，当选举超时后，成为candidate，开始新的选举任期。</li>
-<li>hearbeat timeout 心跳超时：leader指定时间间隔发送消息给follower，每次收到消息重置选举超时，在收到消息前如果选举超时，则会成为下一个candidate，进入到下一个选举期term。</li>
+<h1 id="打家劫舍"><a href="#打家劫舍" class="headerlink" title="打家劫舍"></a>打家劫舍</h1><p>给定一个代表每个房屋存放金额的非负整数数组，计算你不触动警报装置的情况下，一夜之内能够偷窃到的最高金额。两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。</p>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>采用动规的方法解决。dp[i]表示以nums[i-1]结尾的最高金额。<br>另一解法：dp[i]前i个的最大和。dp[i]=max(dp[i-1], dp[i-2]+nums[i])</p>
+<h2 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">dp[i]=max(dp[i-<span class="hljs-number">2</span>],dp[i-<span class="hljs-number">3</span>])+nums[i-<span class="hljs-number">1</span>]<br>dp[<span class="hljs-number">0</span>]=<span class="hljs-number">0</span><br>dp[<span class="hljs-number">1</span>]=nums[<span class="hljs-number">0</span>]<br>dp[<span class="hljs-number">2</span>]=nums[<span class="hljs-number">1</span>]<br>dp[<span class="hljs-number">3</span>]=max(dp[<span class="hljs-number">1</span>], dp[<span class="hljs-number">0</span>])+nums[<span class="hljs-number">2</span>]<br></code></pre></td></tr></table></figure>
+<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间复杂度：O(n)<br>空间复杂度：动规数组，O(n)。结果只与前两个结果相关，可以采用滚动数组，实现O(1)的复杂度。</p>
+<h2 id="进一步-1"><a href="#进一步-1" class="headerlink" title="进一步"></a>进一步</h2><ul>
+<li>打家劫舍II</li>
+<li>打家劫舍III</li>
 </ul>
-</li>
-</ul>
-<p>leader选举过程：</p>
-<ol>
-<li>开始所有节点都是follower。</li>
-<li>没有收到leader消息的follower，且选举超时的成为candidate。</li>
-<li>candidate向其它节点发消息request vote，请求选举。</li>
-<li>如果该term节点未投票，将票投给候选者candidate，且重置election timeout。</li>
-<li>收到大多数节点投票的candidate成为leader。</li>
-<li>特殊情况：两个或以上同时成为candidate，且收到的投票一样（分裂投票），该怎么做？重新选举超时，选出候选者。</li>
-</ol>
-<h2 id="日志复制"><a href="#日志复制" class="headerlink" title="日志复制"></a>日志复制</h2><p>系统所有更改都要通过leader。<br>日志复制过程：</p>
-<ol>
-<li>更改添加到leader的log里的entry中，未提交。</li>
-<li>在下一个心跳，将该entry发送、复制到其它follower节点的日志中。</li>
-<li>leader收到大多数节点已添加该entry的响应消息。</li>
-<li>将该entry提交，leader节点的数据已进行更改。</li>
-<li>leader节点通知其余follower节点该entry已提交，其余节点也进行更新。</li>
-</ol>
-<p>有多个网络分区，每个分区里有leader，多个客户端。<br>日志复制</p>
-<ol>
-<li>一个分区中，leader的更改操作无法复制大多数，entry未提交状态。</li>
-<li>另一个分区，该区leader的更改操作可以复制大多数，entry提交。</li>
-<li>网络分区需要修复，较高的选举任期留下，较低的选举任期的节点退出，回滚其未提交的条目且匹配新leader的日志。</li>
-</ol>
-<p><img src="/images/多个分区日志复制.jpeg" alt="多网络分区"></p>
-<h3 id="Raft的容错和CAP理论"><a href="#Raft的容错和CAP理论" class="headerlink" title="Raft的容错和CAP理论"></a>Raft的容错和CAP理论</h3><p>发生故障类型：</p>
-<ul>
-<li>服务器崩溃：不能提供服务，过段时间恢复。</li>
-<li>网络分区：其中一台或多台服务器与其他服务器和/或客户端断开连接。</li>
-</ul>
-<p>在2N+1个服务器的情况下，它可以容忍N台服务器故障。</p>
 <hr>
-<p>不妨一读：<br>Raft在线可视化：<a target="_blank" rel="noopener" href="http://www.kailing.pub/raft">http://www.kailing.pub/raft</a><br>Raft基于Go的实现：<a target="_blank" rel="noopener" href="https://eli.thegreenplace.net/2020/implementing-raft-part-1-elections/">https://eli.thegreenplace.net/2020/implementing-raft-part-1-elections/</a></p>
+<p>不妨一读：<br>三数之和：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/3sum/">https://leetcode-cn.com/problems/3sum/</a><br>打家劫舍：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/house-robber/">https://leetcode-cn.com/problems/house-robber/</a></p>
 
     </div>
 
@@ -297,10 +260,10 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <!--<a href="/tags/Raft/" rel="tag">Raft</a>-->
-              <a href="/tags/Raft/" rel="tag"><i class="fa fa-tag"></i>Raft</a>
-              <!--<a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a>-->
-              <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i>分布式</a>
+              <!--<a href="/tags/%E9%81%8D%E5%8E%86/" rel="tag">遍历</a>-->
+              <a href="/tags/%E9%81%8D%E5%8E%86/" rel="tag"><i class="fa fa-tag"></i>遍历</a>
+              <!--<a href="/tags/%E5%8A%A8%E8%A7%84/" rel="tag">动规</a>-->
+              <a href="/tags/%E5%8A%A8%E8%A7%84/" rel="tag"><i class="fa fa-tag"></i>动规</a>
           </div>
 
         
@@ -309,12 +272,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/05/24/Java%E7%9A%84%E5%AD%A6%E4%B9%A0/" rel="prev" title="Java的学习">
-      <i class="fa fa-chevron-left"></i> Java的学习
+    <a href="/2021/05/16/%E9%80%92%E5%BD%92/" rel="prev" title="递归">
+      <i class="fa fa-chevron-left"></i> 递归
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/02/14/Go%E7%9A%84%E5%AD%A6%E4%B9%A0/" rel="next" title="Go的学习">
-      Go的学习 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/05/24/Java%E7%9A%84%E5%AD%A6%E4%B9%A0/" rel="next" title="Java的学习">
+      Java的学习 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -374,7 +337,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%86%E5%B8%83%E5%BC%8F%E5%85%B1%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">什么是分布式共识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Raft%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">Raft工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#leader%E9%80%89%E4%B8%BE"><span class="nav-number">2.1.</span> <span class="nav-text">leader选举</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E5%A4%8D%E5%88%B6"><span class="nav-number">2.2.</span> <span class="nav-text">日志复制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Raft%E7%9A%84%E5%AE%B9%E9%94%99%E5%92%8CCAP%E7%90%86%E8%AE%BA"><span class="nav-number">2.2.1.</span> <span class="nav-text">Raft的容错和CAP理论</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C"><span class="nav-number">1.</span> <span class="nav-text">三数之和</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">1.3.</span> <span class="nav-text">复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5"><span class="nav-number">1.4.</span> <span class="nav-text">进一步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D"><span class="nav-number">2.</span> <span class="nav-text">打家劫舍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81-1"><span class="nav-number">2.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6-1"><span class="nav-number">2.3.</span> <span class="nav-text">复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5-1"><span class="nav-number">2.4.</span> <span class="nav-text">进一步</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
