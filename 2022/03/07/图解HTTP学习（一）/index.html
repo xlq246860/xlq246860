@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="HTTP协议访问web.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图解HTTP学习（一）">
+<meta property="og:url" content="http://example.com/2022/03/07/%E5%9B%BE%E8%A7%A3HTTP%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="Taotie&#39;s Blog">
+<meta property="og:description" content="HTTP协议访问web.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-07T06:51:15.000Z">
+<meta property="article:modified_time" content="2022-05-16T13:16:27.115Z">
+<meta property="article:author" content="Taotie">
+<meta property="article:tag" content="HTTP">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/03/07/%E5%9B%BE%E8%A7%A3HTTP%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>图解HTTP学习（一） | Taotie's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Taotie's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/07/%E5%9B%BE%E8%A7%A3HTTP%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+      <meta itemprop="name" content="Taotie">
+      <meta itemprop="description" content="Keep learning.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taotie's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          图解HTTP学习（一）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-07 14:51:15" itemprop="dateCreated datePublished" datetime="2022-03-07T14:51:15+08:00">2022-03-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <div class="post-description">HTTP协议访问web.</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="了解web及网络基础"><a href="#了解web及网络基础" class="headerlink" title="了解web及网络基础"></a>了解web及网络基础</h1><h2 id="TCP-IP协议族"><a href="#TCP-IP协议族" class="headerlink" title="TCP/IP协议族"></a>TCP/IP协议族</h2><p>网络是在TCP/IP协议族的基础上运作的，HTTP属于内部的一个子集。</p>
+<h2 id="分层管理"><a href="#分层管理" class="headerlink" title="分层管理"></a>分层管理</h2><ol>
+<li>应用层：向用户提供应用服务时通信的活动。<ul>
+<li>FTP(File Transfer Protocol 文件传输协议) </li>
+<li>DNS(Domain Name System 域名系统)</li>
+<li>HTTP(超文本传输协议)</li>
+</ul>
+</li>
+<li>传输层：对上层提供处于连接中的两台计算机之间的数据传输。<ul>
+<li>TCP(Transmission Control Protocol)</li>
+<li>UDP(User Data Protocol)</li>
+</ul>
+</li>
+<li>网络层：规定了通过怎样的路径到达对方的计算机，并把数据包传输给对方。（数据包是网络传输的最小数据单位）</li>
+<li>数据链路层：用来处理连接网络的硬件部分，包括控制操作系统、硬件的设备驱动、NIC（网卡）及光纤等物理可见部分。</li>
+</ol>
+<p>层次化可以解耦，将各层间的接口定义好，内部变动不影响外部。</p>
+<p>举例理解：<br>每通过一层，则增加该层的首部信息。</p>
+<blockquote>
+<p>应用层 HTTP报文（HTTP数据）-&gt; 传输层 TCP报文段（HTTP数据+TCP首部）-&gt; 网络层 IP数据包（HTTP数据+TCP首部+IP首部）-&gt; 链路层（HTTP数据+TCP首部+IP首部+以太网首部）</p>
+</blockquote>
+<h2 id="IP、TCP、DNS"><a href="#IP、TCP、DNS" class="headerlink" title="IP、TCP、DNS"></a>IP、TCP、DNS</h2><ul>
+<li>IP 网络协议<ul>
+<li>IP地址：节点被分配的地址</li>
+<li>MAC地址（Media Access Control Address）：网卡所属的固定地址。ARP协议以解析地址。</li>
+<li>routing（路由选择），无法全面掌握互联网中的细节。明确下站该送往哪个区域的集散中心，那个区域的集散中心自会判断是否能送到对方的家中。</li>
+</ul>
+</li>
+<li>TCP：可靠性，确保数据能够到达目标。<ul>
+<li>提供可靠的字节流服务，将大块数据分割成以报文段为单位的数据包进行管理。</li>
+<li>三次握手策略：SYN(synchronize)和ACK(acknowledgement)标志。</li>
+<li>问题：为什么不是四次握手或者两次握手。SYN+ACK使双方都确认收到消息，保证了消息的可靠性。两次不能保证可靠性，四次传输效率低。</li>
+</ul>
+</li>
+<li>DNS：提供域名到IP地址之间的解析服务。<ul>
+<li>迭代、递归。</li>
+</ul>
+</li>
+</ul>
+<h2 id="各种协议与HTTP协议的关系"><a href="#各种协议与HTTP协议的关系" class="headerlink" title="各种协议与HTTP协议的关系"></a>各种协议与HTTP协议的关系</h2><ol>
+<li>DNS（解析域名，得到IP地址，放入HTTP请求报文头部）</li>
+<li>HTTP协议，生成请求服务器资源的HTTP报文</li>
+<li>TCP/UDP，把报文切割成报文段，为HTTP协议提供可靠的连接。服务器端：重组到达的报文。</li>
+<li>IP协议，网络层，ARP解析IP地址为MAC地址。决定传输路径。（客户端、路由器、服务端）</li>
+</ol>
+<h2 id="URL和URI"><a href="#URL和URI" class="headerlink" title="URL和URI"></a>URL和URI</h2><ul>
+<li>URL 统一资源定位符：网页地址。表示资源的地点。</li>
+<li>URI 统一资源标识符：某个协议方案表示的资源的定位标识符。用字符串标识某一互联网资源。<ul>
+<li>URI格式</li>
+<li>RFC(Request For Comments，征求修正意见书)：应用程序按照RFC标准实现。</li>
+</ul>
+</li>
+</ul>
+<h1 id="简单的HTTP协议（HTTP-1-1版本）"><a href="#简单的HTTP协议（HTTP-1-1版本）" class="headerlink" title="简单的HTTP协议（HTTP/1.1版本）"></a>简单的HTTP协议（HTTP/1.1版本）</h1><h2 id="客户端、服务端"><a href="#客户端、服务端" class="headerlink" title="客户端、服务端"></a>客户端、服务端</h2><h2 id="请求、响应"><a href="#请求、响应" class="headerlink" title="请求、响应"></a>请求、响应</h2><ul>
+<li>请求报文内容：<ul>
+<li>请求访问服务器的方法（GET/POST），URI，协议/版本</li>
+<li>可选的请求首部字段：Host，content-length，content-type</li>
+<li>内容实体：name=amy&amp;age=37</li>
+</ul>
+</li>
+<li>响应报文（处理结果）<ul>
+<li>协议/版本，状态码，原因短语(ok, not found?)</li>
+<li>可选的首部字段：Date，Content-length，Content-type: text/html.</li>
+<li>内容</li>
+</ul>
+</li>
+</ul>
+<h2 id="无状态协议"><a href="#无状态协议" class="headerlink" title="无状态协议"></a>无状态协议</h2><p>HTTP协议自身不对之前请求-响应的通信状态进行保存，不做持久化处理，也就是无状态。<br>业务需求，需要保持状态。举例说明：</p>
+<blockquote>
+<p>用户登录购物网站，跳转到其它页面，需要继续保持登录状态。为了知道谁送出的请求，需要保存用户的状态。</p>
+</blockquote>
+<p>引入cookie技术。</p>
+<p>HTTP是无状态协议，无法根据之前的状态进行本次的请求处理。<br>无状态的优点：减轻服务器的CPU及内存资源的消耗。缺点：有些业务场景无法处理。如登录状态需要保存，不能每次跳转都要进行登录或携带参数。</p>
+<h2 id="cookie技术"><a href="#cookie技术" class="headerlink" title="cookie技术"></a>cookie技术</h2><p>保留无状态协议减轻服务器消耗的有点又要记住用户的状态信息。引入cookie技术，通过在请求和响应报文中写入Cookie信息来控制客户端的状态。</p>
+<p>具体步骤：</p>
+<ul>
+<li>服务器的响应报文的首部字段信息中有个set-Cookie，让客户端保存下cookie信息，下次客户端再往该服务器发送请求时，自动写入cookie字段到请求报文中再发送。</li>
+<li>服务器收到客户端发送的cookie后，对比服务器记录，检查是哪个客户端发来的连接请求，最后得到之前的状态信息。</li>
+</ul>
+<p>set-cookie和cookie都在首部字段中。</p>
+<h2 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h2><ul>
+<li>绝对URI</li>
+<li>相对URI，配合host一起。</li>
+</ul>
+<h2 id="HTTP方法"><a href="#HTTP方法" class="headerlink" title="HTTP方法"></a>HTTP方法</h2><ul>
+<li>GET：获取资源</li>
+<li>POST：传输实体主体。GET也可以传输实体，以参数形式明文传输。</li>
+<li>PUT：传输文件。在请求报文的主体中包含文件内容，保存到URI指定的位置。存在安全问题，无法验证，人人可上传。</li>
+<li>HEAD：获得报文首部。和GET方法一样，只不过不返回主体，只有首部。用于确定URI的有效性和资源更新的日期等。</li>
+<li>DELETE：删除文件。删除请求URI指定的资源，HTTP/1.1不带验证机制，一般不使用。</li>
+<li>OPTIONS：询问请求URI指定资源支持的方法。</li>
+<li>TRACE：追踪路径。服务器端将请求 通信 环回给客户端。<ul>
+<li>发送请求时，在Max-forwards首部字段中填入数值，每经过一个服务器就将该数字减1，直到0的服务器，返回状态码200的响应。可以查询发送出去的请求是怎样被修改/篡改的，因为想要连接服务器要经过一系列中转，客户端想要确认连接过程中发生的操作。</li>
+</ul>
+</li>
+<li>CONNECT：要求用隧道协议连接代理。要求和代理服务器建立隧道，实现用隧道协议进行TCP通信，主要用SSL和TSL协议加密数据后经网络隧道传输。 CONNECT 服务器名:端口号 协议及版本</li>
+</ul>
+<h2 id="持久连接节省通信量"><a href="#持久连接节省通信量" class="headerlink" title="持久连接节省通信量"></a>持久连接节省通信量</h2><h3 id="持久连接"><a href="#持久连接" class="headerlink" title="持久连接"></a>持久连接</h3><p>HTTP keep alive. 只要任意一端没有明确提出断开连接，则保持TCP连接状态。<br>一次TCP连接多次请求和响应。</p>
+<h3 id="管线化"><a href="#管线化" class="headerlink" title="管线化"></a>管线化</h3><p>不等待响应，并行发送多个请求。</p>
+
+    </div>
+
+    
+    
+    
+
+    
+       <div>
+         <div>
+  
+    <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+      <span>-------- 本文结束 </span>
+      <i class="fa fa-paw"></i>
+      <span> 感谢阅读 --------</span>
+    </div>
+  
+</div>
+       </div>
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <!--<a href="/tags/HTTP/" rel="tag">HTTP</a>-->
+              <a href="/tags/HTTP/" rel="tag"><i class="fa fa-tag"></i>HTTP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/16/Raft%20%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%80%EF%BC%89/" rel="prev" title="Raft 实现（一）">
+      <i class="fa fa-chevron-left"></i> Raft 实现（一）
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3web%E5%8F%8A%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">了解web及网络基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-IP%E5%8D%8F%E8%AE%AE%E6%97%8F"><span class="nav-number">1.1.</span> <span class="nav-text">TCP&#x2F;IP协议族</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B1%82%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">分层管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP%E3%80%81TCP%E3%80%81DNS"><span class="nav-number">1.3.</span> <span class="nav-text">IP、TCP、DNS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%84%E7%A7%8D%E5%8D%8F%E8%AE%AE%E4%B8%8EHTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">1.4.</span> <span class="nav-text">各种协议与HTTP协议的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#URL%E5%92%8CURI"><span class="nav-number">1.5.</span> <span class="nav-text">URL和URI</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%EF%BC%88HTTP-1-1%E7%89%88%E6%9C%AC%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">简单的HTTP协议（HTTP&#x2F;1.1版本）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E3%80%81%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-number">2.1.</span> <span class="nav-text">客户端、服务端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E3%80%81%E5%93%8D%E5%BA%94"><span class="nav-number">2.2.</span> <span class="nav-text">请求、响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E7%8A%B6%E6%80%81%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.3.</span> <span class="nav-text">无状态协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie%E6%8A%80%E6%9C%AF"><span class="nav-number">2.4.</span> <span class="nav-text">cookie技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#URI"><span class="nav-number">2.5.</span> <span class="nav-text">URI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E6%96%B9%E6%B3%95"><span class="nav-number">2.6.</span> <span class="nav-text">HTTP方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E8%BF%9E%E6%8E%A5%E8%8A%82%E7%9C%81%E9%80%9A%E4%BF%A1%E9%87%8F"><span class="nav-number">2.7.</span> <span class="nav-text">持久连接节省通信量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.7.1.</span> <span class="nav-text">持久连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E7%BA%BF%E5%8C%96"><span class="nav-number">2.7.2.</span> <span class="nav-text">管线化</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Taotie"
+      src="/images/touxiang.jpg">
+  <p class="site-author-name" itemprop="name">Taotie</p>
+  <div class="site-description" itemprop="description">Keep learning.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/qhbb" title="https:&#x2F;&#x2F;gitee.com&#x2F;qhbb" rel="noopener" target="_blank">Taotie</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taotie</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
