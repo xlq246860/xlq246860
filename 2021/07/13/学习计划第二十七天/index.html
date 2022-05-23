@@ -20,21 +20,23 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="美化数组的最少删除数；回文串；栈中取出K个硬币的最大和.">
+  <meta name="description" content="装满石头的背包的最大数量；表示一个折线图的最少线段数.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习计划第二十四天">
-<meta property="og:url" content="http://example.com/2021/07/09/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%A4%A9/index.html">
+<meta property="og:title" content="学习计划第二十七天">
+<meta property="og:url" content="http://example.com/2021/07/13/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9/index.html">
 <meta property="og:site_name" content="Taotie&#39;s Blog">
-<meta property="og:description" content="美化数组的最少删除数；回文串；栈中取出K个硬币的最大和.">
+<meta property="og:description" content="装满石头的背包的最大数量；表示一个折线图的最少线段数.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-09T02:32:31.000Z">
-<meta property="article:modified_time" content="2022-05-18T07:29:29.234Z">
+<meta property="article:published_time" content="2021-07-13T01:15:31.000Z">
+<meta property="article:modified_time" content="2022-05-23T03:10:48.701Z">
 <meta property="article:author" content="Taotie">
-<meta property="article:tag" content="动规">
+<meta property="article:tag" content="堆排序">
+<meta property="article:tag" content="贪心">
+<meta property="article:tag" content="单调栈">
 <meta property="article:tag" content="前缀和">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/07/09/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%A4%A9/">
+<link rel="canonical" href="http://example.com/2021/07/13/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9/">
 
 
 <script id="page-configurations">
@@ -47,7 +49,7 @@
   };
 </script>
 
-  <title>学习计划第二十四天 | Taotie's Blog</title>
+  <title>学习计划第二十七天 | Taotie's Blog</title>
   
 
 
@@ -167,7 +169,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/09/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%A4%A9/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/13/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%A4%A9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/touxiang.jpg">
@@ -180,7 +182,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          学习计划第二十四天
+          学习计划第二十七天
         </h1>
 
         <div class="post-meta">
@@ -190,7 +192,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-07-09 10:32:31" itemprop="dateCreated datePublished" datetime="2021-07-09T10:32:31+08:00">2021-07-09</time>
+              <time title="创建时间：2021-07-13 09:15:31" itemprop="dateCreated datePublished" datetime="2021-07-13T09:15:31+08:00">2021-07-13</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -208,9 +210,9 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>620</span>
+              <span>385</span>
             </span>
-            <div class="post-description">美化数组的最少删除数；回文串；栈中取出K个硬币的最大和.</div>
+            <div class="post-description">装满石头的背包的最大数量；表示一个折线图的最少线段数.</div>
 
         </div>
       </header>
@@ -221,14 +223,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="美化数组的最少删除数"><a href="#美化数组的最少删除数" class="headerlink" title="美化数组的最少删除数"></a>美化数组的最少删除数</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>遍历操作进行删除，但不真正做删除操作，只统计删除数。按理是O(n)的时间，但是超时。感觉解答的答案和我做法类似，但我的方案会超时。</p>
-<h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;len;i++)<br>&#123;<br>    <span class="hljs-keyword">if</span>(i+<span class="hljs-number">1</span>&lt;len&amp;&amp;nums[i]==nums[i+<span class="hljs-number">1</span>])<br>    &#123;<br>        count++;<br>    &#125;<br>    <span class="hljs-keyword">else</span><br>    &#123;<br>        i++;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间复杂度：O(n)</p>
-<h1 id="回文串"><a href="#回文串" class="headerlink" title="回文串"></a>回文串</h1><h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>是有规律的，需要得出规律式。位置与回文数的关系。<br>10000001 100000001<br>10011001 100010001<br>10022001 100020001</p>
-<p>得到的规律为：数字关于一半对称，第j大的数就是(一半的数基数+j-1)<br>10^(k/2-1)+l-1.</p>
-<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间复杂度：O(len)，len为数组长度</p>
-<h1 id="栈中取出K个硬币的最大和"><a href="#栈中取出K个硬币的最大和" class="headerlink" title="栈中取出K个硬币的最大和"></a>栈中取出K个硬币的最大和</h1><h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>前缀和；动规；递归。<br>利用前缀和实现动规？<br>只用前缀和递归，时间复杂度为O(len^k)，非常大，不行。<br>动规方程没有写出。<br>分组背包问题。动规方程：<br>preSum[i][j] 栈i的前j个数之和<br>dp[i][j] 前i个背包体积为j的最大价值<br>dp[i][j]=max(dp[i][j], dp[i-1][j-v]+w)<br>即：<br>dp[i][j]=max(dp[i][j], dp[i-1][j-w]+preSum[i][w]).</p>
-<h2 id="复杂度-2"><a href="#复杂度-2" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间复杂度：O(n<em>k</em>k)<br>空间复杂度：O(nk)</p>
+        <h1 id="装满石头的背包的最大数量"><a href="#装满石头的背包的最大数量" class="headerlink" title="装满石头的背包的最大数量"></a>装满石头的背包的最大数量</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>采用贪心的方法，每次都把最小的背包剩余容量装满，可以实现背包数量最大化，利用最小堆维护相差最小的背包里的剩余容量。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间复杂度：O(nlogn)<br>空间复杂度：O(n)</p>
+<h1 id="表示一个折线图的最少线段数"><a href="#表示一个折线图的最少线段数" class="headerlink" title="表示一个折线图的最少线段数"></a>表示一个折线图的最少线段数</h1><h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>利用直线的斜率判断是否在一条线段上，需要注意精确度问题。</p>
+<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间复杂度：O(n)</p>
+<h1 id="巫师的总力量和"><a href="#巫师的总力量和" class="headerlink" title="巫师的总力量和"></a>巫师的总力量和</h1><h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>我采用的是两层遍历的方法，枚举出子数组[i, j]内的最小值和数组和，计算得到结果。时间复杂度O(n^2)。</p>
+<p>可以实现O(n)的方案。采用的是前缀和+单调栈。<br>利用left和right维护每个元素最左范围和最右范围，在此范围内该元素最小。一侧是严格小于，另一侧是小于等于，可以实现不重复。<br>同时计算此范围内的所有子数组的和。计算前缀和的前缀和实现。</p>
+<hr>
+<p>不妨一读：<br><a target="_blank" rel="noopener" href="https://leetcode.cn/contest/weekly-contest-294/">https://leetcode.cn/contest/weekly-contest-294/</a></p>
 
     </div>
 
@@ -252,8 +254,12 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <!--<a href="/tags/%E5%8A%A8%E8%A7%84/" rel="tag">动规</a>-->
-              <a href="/tags/%E5%8A%A8%E8%A7%84/" rel="tag"><i class="fa fa-tag"></i>动规</a>
+              <!--<a href="/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/" rel="tag">堆排序</a>-->
+              <a href="/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/" rel="tag"><i class="fa fa-tag"></i>堆排序</a>
+              <!--<a href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a>-->
+              <a href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag"><i class="fa fa-tag"></i>贪心</a>
+              <!--<a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" rel="tag">单调栈</a>-->
+              <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" rel="tag"><i class="fa fa-tag"></i>单调栈</a>
               <!--<a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a>-->
               <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag"><i class="fa fa-tag"></i>前缀和</a>
           </div>
@@ -264,12 +270,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/07/09/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9/" rel="prev" title="学习计划第二十三天">
-      <i class="fa fa-chevron-left"></i> 学习计划第二十三天
+    <a href="/2021/07/10/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%A4%A9/" rel="prev" title="学习计划第二十五天">
+      <i class="fa fa-chevron-left"></i> 学习计划第二十五天
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/07/10/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%A4%A9/" rel="next" title="学习计划第二十五天">
-      学习计划第二十五天 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/11/10/MySQL%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" rel="next" title="MySQL学习（一）">
+      MySQL学习（一） <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -329,7 +335,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BE%8E%E5%8C%96%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%91%E5%88%A0%E9%99%A4%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">美化数组的最少删除数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">1.3.</span> <span class="nav-text">复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9E%E6%96%87%E4%B8%B2"><span class="nav-number">2.</span> <span class="nav-text">回文串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6-1"><span class="nav-number">2.2.</span> <span class="nav-text">复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%88%E4%B8%AD%E5%8F%96%E5%87%BAK%E4%B8%AA%E7%A1%AC%E5%B8%81%E7%9A%84%E6%9C%80%E5%A4%A7%E5%92%8C"><span class="nav-number">3.</span> <span class="nav-text">栈中取出K个硬币的最大和</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6-2"><span class="nav-number">3.2.</span> <span class="nav-text">复杂度</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A3%85%E6%BB%A1%E7%9F%B3%E5%A4%B4%E7%9A%84%E8%83%8C%E5%8C%85%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E9%87%8F"><span class="nav-number">1.</span> <span class="nav-text">装满石头的背包的最大数量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">1.2.</span> <span class="nav-text">复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A8%E7%A4%BA%E4%B8%80%E4%B8%AA%E6%8A%98%E7%BA%BF%E5%9B%BE%E7%9A%84%E6%9C%80%E5%B0%91%E7%BA%BF%E6%AE%B5%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">表示一个折线图的最少线段数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6-1"><span class="nav-number">2.2.</span> <span class="nav-text">复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%AB%E5%B8%88%E7%9A%84%E6%80%BB%E5%8A%9B%E9%87%8F%E5%92%8C"><span class="nav-number">3.</span> <span class="nav-text">巫师的总力量和</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
