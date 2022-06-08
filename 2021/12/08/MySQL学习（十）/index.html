@@ -20,21 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="分割数组的方案数；最大波动的子字符串；构造字符串的总得分和.">
+  <meta name="description" content="性能提升.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习计划第二十三天">
-<meta property="og:url" content="http://example.com/2021/07/09/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9/index.html">
+<meta property="og:title" content="MySQL学习（十）">
+<meta property="og:url" content="http://example.com/2021/12/08/MySQL%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%8D%81%EF%BC%89/index.html">
 <meta property="og:site_name" content="Taotie&#39;s Blog">
-<meta property="og:description" content="分割数组的方案数；最大波动的子字符串；构造字符串的总得分和.">
+<meta property="og:description" content="性能提升.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-09T01:23:31.000Z">
-<meta property="article:modified_time" content="2022-05-17T07:41:41.299Z">
+<meta property="article:published_time" content="2021-12-08T07:01:15.000Z">
+<meta property="article:modified_time" content="2022-06-08T07:50:58.150Z">
 <meta property="article:author" content="Taotie">
-<meta property="article:tag" content="递归">
-<meta property="article:tag" content="前缀和">
+<meta property="article:tag" content="连接">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/07/09/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9/">
+<link rel="canonical" href="http://example.com/2021/12/08/MySQL%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%8D%81%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -47,7 +46,7 @@
   };
 </script>
 
-  <title>学习计划第二十三天 | Taotie's Blog</title>
+  <title>MySQL学习（十） | Taotie's Blog</title>
   
 
 
@@ -167,7 +166,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/09/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/08/MySQL%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%8D%81%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/touxiang.jpg">
@@ -180,7 +179,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          学习计划第二十三天
+          MySQL学习（十）
         </h1>
 
         <div class="post-meta">
@@ -190,7 +189,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-07-09 09:23:31" itemprop="dateCreated datePublished" datetime="2021-07-09T09:23:31+08:00">2021-07-09</time>
+              <time title="创建时间：2021-12-08 15:01:15" itemprop="dateCreated datePublished" datetime="2021-12-08T15:01:15+08:00">2021-12-08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -198,7 +197,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
                 </span>
             </span>
 
@@ -208,9 +207,9 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>522</span>
+              <span>258</span>
             </span>
-            <div class="post-description">分割数组的方案数；最大波动的子字符串；构造字符串的总得分和.</div>
+            <div class="post-description">性能提升.</div>
 
         </div>
       </header>
@@ -221,12 +220,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="分割数组的方案数"><a href="#分割数组的方案数" class="headerlink" title="分割数组的方案数"></a>分割数组的方案数</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>前缀和、后缀和的做法。注意：和可能会超出整型范围，所以需要用Long型。</p>
-<h2 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">long</span>[] preSum=<span class="hljs-keyword">new</span> <span class="hljs-title class_">long</span>[len];<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;len;i++)<br>&#123;<br>    <span class="hljs-keyword">if</span>(i!=<span class="hljs-number">0</span>)<br>    &#123;<br>        preSum[i]=preSum[i-<span class="hljs-number">1</span>]+nums[i];<br>        postSum[n-<span class="hljs-number">1</span>-i]=postSum[n-i]+nums[n-i];<br>    &#125;<br>    <span class="hljs-keyword">else</span><br>    &#123;<br>        preSum[i]=nums[i];<br>        postSum[n-<span class="hljs-number">1</span>]=<span class="hljs-number">0</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间复杂度：O(n)</p>
-<h1 id="最大波动的子字符串（※）"><a href="#最大波动的子字符串（※）" class="headerlink" title="最大波动的子字符串（※）"></a>最大波动的子字符串（※）</h1><h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>因为只包含小写字母，所以可以枚举出现最多次的字母和出现最少次的字母。并用diff记录(max-min)，当遍历的字母为出现最多次数的字母时，diff++；当遍历的字母为出现最少次数的字母时，diff—。注意，两个字母不能为同一个字母。且diff不能&lt;0。diffWithB是包含了出现次数最少的字母的子字符串。</p>
-<h1 id="毯子覆盖的最多白色砖块数"><a href="#毯子覆盖的最多白色砖块数" class="headerlink" title="毯子覆盖的最多白色砖块数"></a>毯子覆盖的最多白色砖块数</h1><h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>滑窗+双指针。注意边界取值。毯子长度可以覆盖的区间为len=left-right+1.</p>
-<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间复杂度：O(n)</p>
+        <h1 id="短连接"><a href="#短连接" class="headerlink" title="短连接"></a>短连接</h1><p>执行很少的SQL语句就断开连接，下次重新连接。如果连接数暴增，会导致在连接判断权限的地方消耗资源，导致占用真正执行的操作的资源。</p>
+<h2 id="主动断开空闲连接"><a href="#主动断开空闲连接" class="headerlink" title="主动断开空闲连接"></a>主动断开空闲连接</h2><p>优先断开事务外的空闲连接，如果断开事务内的连接，会导致回滚。</p>
+<h2 id="减少连接过程的消耗"><a href="#减少连接过程的消耗" class="headerlink" title="减少连接过程的消耗"></a>减少连接过程的消耗</h2><p>比如，去掉权限判断和验证</p>
+<h1 id="慢查询"><a href="#慢查询" class="headerlink" title="慢查询"></a>慢查询</h1><ol>
+<li>索引设计不好：紧急创建索引</li>
+<li>SQL语句写得不好：重写。</li>
+<li>引擎选错索引：force index强制选择索引。</li>
+</ol>
+<p>前两个问题可以在上线前避免，测试的时候发现问题，避免。</p>
+<h1 id="QPS突增"><a href="#QPS突增" class="headerlink" title="QPS突增"></a>QPS突增</h1><p>业务bug，导致某个语句QPS激增。</p>
+<ol>
+<li>下线该功能，删掉数据库白名单</li>
+<li>单独数据库用户，删除账号</li>
+<li>改语句</li>
+</ol>
 
     </div>
 
@@ -250,10 +258,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <!--<a href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a>-->
-              <a href="/tags/%E9%80%92%E5%BD%92/" rel="tag"><i class="fa fa-tag"></i>递归</a>
-              <!--<a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a>-->
-              <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag"><i class="fa fa-tag"></i>前缀和</a>
+              <!--<a href="/tags/%E8%BF%9E%E6%8E%A5/" rel="tag">连接</a>-->
+              <a href="/tags/%E8%BF%9E%E6%8E%A5/" rel="tag"><i class="fa fa-tag"></i>连接</a>
           </div>
 
         
@@ -262,12 +268,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/07/05/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%A4%A9/" rel="prev" title="学习计划第二十一天">
-      <i class="fa fa-chevron-left"></i> 学习计划第二十一天
+    <a href="/2021/11/20/MySQL%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%94%EF%BC%89/" rel="prev" title="MySQL学习（五）">
+      <i class="fa fa-chevron-left"></i> MySQL学习（五）
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/07/09/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%A4%A9/" rel="next" title="学习计划第二十四天">
-      学习计划第二十四天 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/12/15/%E7%BE%A4%E9%9D%A2%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" rel="next" title="群面经验总结">
+      群面经验总结 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -327,7 +333,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%89%B2%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E6%A1%88%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">分割数组的方案数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">1.3.</span> <span class="nav-text">复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E6%B3%A2%E5%8A%A8%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E2%80%BB%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">最大波动的子字符串（※）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AF%AF%E5%AD%90%E8%A6%86%E7%9B%96%E7%9A%84%E6%9C%80%E5%A4%9A%E7%99%BD%E8%89%B2%E7%A0%96%E5%9D%97%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">毯子覆盖的最多白色砖块数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6-1"><span class="nav-number">3.2.</span> <span class="nav-text">复杂度</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%AD%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.</span> <span class="nav-text">短连接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E5%8A%A8%E6%96%AD%E5%BC%80%E7%A9%BA%E9%97%B2%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.1.</span> <span class="nav-text">主动断开空闲连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%8F%E5%B0%91%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B%E7%9A%84%E6%B6%88%E8%80%97"><span class="nav-number">1.2.</span> <span class="nav-text">减少连接过程的消耗</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%85%A2%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.</span> <span class="nav-text">慢查询</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#QPS%E7%AA%81%E5%A2%9E"><span class="nav-number">3.</span> <span class="nav-text">QPS突增</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
