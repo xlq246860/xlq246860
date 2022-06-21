@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="IP基础知识；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图解网络（一）">
+<meta property="og:url" content="http://example.com/2022/05/03/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="Taotie&#39;s Blog">
+<meta property="og:description" content="IP基础知识；">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-03T02:37:07.000Z">
+<meta property="article:modified_time" content="2022-06-21T08:17:37.366Z">
+<meta property="article:author" content="Taotie">
+<meta property="article:tag" content="IP">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/05/03/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>图解网络（一） | Taotie's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Taotie's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/03/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+      <meta itemprop="name" content="Taotie">
+      <meta itemprop="description" content="Keep learning.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taotie's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          图解网络（一）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-05-03 10:37:07" itemprop="dateCreated datePublished" datetime="2022-05-03T10:37:07+08:00">2022-05-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <div class="post-description">IP基础知识；</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="IP基础知识"><a href="#IP基础知识" class="headerlink" title="IP基础知识"></a>IP基础知识</h1><h2 id="IP和MAC"><a href="#IP和MAC" class="headerlink" title="IP和MAC"></a>IP和MAC</h2><p>IP：网络层。<br>MAC：数据链路层<br>网络层作用：实现主机和主机之间的通信，也叫点对点通信。IP是不直连的两个网络之间的通信，MAC负责两个直连设备之间的通信。<br><strong>在网络中数据包传输中，源IP地址和目的IP地址在传输过程中不变化，但源MAC和目的MAC地址一直在变化。</strong></p>
+<h2 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h2><p>IP地址不是以主机数配置，而是以网卡。服务器、路由器之类都有2个以上网卡，即有两个以上IP地址。<br>最多可有2^32=43亿IP地址，因为一个设备就不止一个IP地址，加上手机等，会导致IP地址不够用，采用可以更换IP地址的技术<strong>NAT</strong>。</p>
+<h3 id="IP地址分类"><a href="#IP地址分类" class="headerlink" title="IP地址分类"></a>IP地址分类</h3><p>五类：0, 10, 110, 1110, 11110.<br>A、B、C类地址，网络号+主机号：IP地址和子网掩码进行与操作得到网络号，子网掩码取反和IP地址进行与操作得到主机号。主机号全为1时，指定为某网络下全部地址，用于广播。<br>D、E类地址：D类地址用于多播，将包发给特定组内的所有地址。E类地址预留。</p>
+<h3 id="CIDR无分类地址"><a href="#CIDR无分类地址" class="headerlink" title="CIDR无分类地址"></a>CIDR无分类地址</h3><p>a.b.c.d/x，前x位属于网络号，后面是主机号。<br>子网掩码：掩盖掉主机号，剩余的是网络号。<br>网络号的作用：两台计算机通讯，首先判断是否处于同一广播域内，即网络地址是否相同，相同则表明接收方在本网络上，直接把数据发到目标主机。不相同，可以通过路由器寻址，找到对应的网络号，把数据包转发给对应的网络内。</p>
+<p>子网划分：网络地址+主机地址（子网网络地址+子网主机地址）</p>
+<h3 id="公有IP地址和私有IP地址"><a href="#公有IP地址和私有IP地址" class="headerlink" title="公有IP地址和私有IP地址"></a>公有IP地址和私有IP地址</h3><p>学校、家里用的是私有IP地址，允许组织内部自己管理，自己分配，可以重复。公有IP地址在整个互联网范围内保持一致，如你的博客网站。<br>ICANN组织管理公有IP地址。</p>
+<h3 id="路由控制"><a href="#路由控制" class="headerlink" title="路由控制"></a>路由控制</h3><p>IP地址的网络地址用于路由控制。主机和路由器有路由表，确定下一跳。</p>
+<h3 id="IP分片"><a href="#IP分片" class="headerlink" title="IP分片"></a>IP分片</h3><p>MTU最大传输单元：IP数据包大于MTU，就会分片。<br>MSS：TCP引入，在TCP层进行分片。</p>
+<h3 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h3><p>128位，每16位为一组。用[:]隔开。连续0时将0省略，用[::]隔开，只允许出现一次。</p>
+<ul>
+<li>可自动配置没有DHCP服务器也可以自动分配IP地址。</li>
+<li>简化了包头首部结构，提高传输性能。</li>
+</ul>
+<h2 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h2><ul>
+<li>DNS协议：应用层<ul>
+<li>域名解析，将域名网址转换为具体的IP地址</li>
+</ul>
+</li>
+<li>ARP和RARP协议：网络层（IP协议下方）<ul>
+<li>确定源和目标IP地址后，通过主机路由表确定数据包下一跳，即找到下一跳的IP地址，通过ARP协议，找到下一跳的MAC地址。</li>
+<li>RARP：应用于打印机服务器等小型嵌入式设备接入到网络时。</li>
+</ul>
+</li>
+<li>DHCP协议 动态获取IP地址<ul>
+<li>DHCP服务器，客户端采用UDP广播通信的形式发现服务器，请求获取IP地址</li>
+<li>DISCOVER、OFFER、REQUEST、ACK.</li>
+</ul>
+</li>
+<li>NAT 网络地址转换<ul>
+<li>缓解IP地址耗尽的问题</li>
+<li>对外部通信时，把私有IP地址转换成公有IP地址。NAPT：可以把IP地址+端口号一起进行转换。不同的私有IP地址都转换为相同公有IP地址，以不同的端口号作为区分。</li>
+</ul>
+</li>
+<li>ICMP、IGMP协议：网络层（IP协议上方）<ul>
+<li>ICMP互联网控制报文协议：用于诊断的查询消息；通知出错原因的错误消息。</li>
+<li>IGMP因特网组管理协议：组播地址，如何管理是否在一组。</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    
+       <div>
+         <div>
+  
+    <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+      <span>-------- 本文结束 </span>
+      <i class="fa fa-paw"></i>
+      <span> 感谢阅读 --------</span>
+    </div>
+  
+</div>
+       </div>
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <!--<a href="/tags/IP/" rel="tag">IP</a>-->
+              <a href="/tags/IP/" rel="tag"><i class="fa fa-tag"></i>IP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/15/%E5%9B%BE%E8%A7%A3HTTP%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%9B%9B%EF%BC%89/" rel="prev" title="图解HTTP学习（四）">
+      <i class="fa fa-chevron-left"></i> 图解HTTP学习（四）
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">IP基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IP%E5%92%8CMAC"><span class="nav-number">1.1.</span> <span class="nav-text">IP和MAC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP%E5%9C%B0%E5%9D%80"><span class="nav-number">1.2.</span> <span class="nav-text">IP地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB"><span class="nav-number">1.2.1.</span> <span class="nav-text">IP地址分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CIDR%E6%97%A0%E5%88%86%E7%B1%BB%E5%9C%B0%E5%9D%80"><span class="nav-number">1.2.2.</span> <span class="nav-text">CIDR无分类地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E6%9C%89IP%E5%9C%B0%E5%9D%80%E5%92%8C%E7%A7%81%E6%9C%89IP%E5%9C%B0%E5%9D%80"><span class="nav-number">1.2.3.</span> <span class="nav-text">公有IP地址和私有IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E6%8E%A7%E5%88%B6"><span class="nav-number">1.2.4.</span> <span class="nav-text">路由控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP%E5%88%86%E7%89%87"><span class="nav-number">1.2.5.</span> <span class="nav-text">IP分片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPv6"><span class="nav-number">1.2.6.</span> <span class="nav-text">IPv6</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.3.</span> <span class="nav-text">IP协议</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Taotie"
+      src="/images/touxiang.jpg">
+  <p class="site-author-name" itemprop="name">Taotie</p>
+  <div class="site-description" itemprop="description">Keep learning.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/qhbb" title="https:&#x2F;&#x2F;gitee.com&#x2F;qhbb" rel="noopener" target="_blank">Taotie</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taotie</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
