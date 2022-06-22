@@ -20,21 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="博客搭建踩坑.">
+  <meta name="description" content="TCP三次握手和四次挥手；">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo 搭建个人博客系列：踩坑系列篇">
-<meta property="og:url" content="http://example.com/2017/04/20/Hexo%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E5%88%97%EF%BC%9A%E8%B8%A9%E5%9D%91%E7%B3%BB%E5%88%97%E7%AF%87/index.html">
+<meta property="og:title" content="图解网络（二）">
+<meta property="og:url" content="http://example.com/2022/05/05/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
 <meta property="og:site_name" content="Taotie&#39;s Blog">
-<meta property="og:description" content="博客搭建踩坑.">
+<meta property="og:description" content="TCP三次握手和四次挥手；">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2017-04-20T10:30:16.000Z">
-<meta property="article:modified_time" content="2022-04-09T08:07:47.132Z">
+<meta property="article:published_time" content="2022-05-05T01:23:03.000Z">
+<meta property="article:modified_time" content="2022-06-22T07:37:18.926Z">
 <meta property="article:author" content="Taotie">
-<meta property="article:tag" content="Hexo">
-<meta property="article:tag" content="Github">
+<meta property="article:tag" content="TCP">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2017/04/20/Hexo%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E5%88%97%EF%BC%9A%E8%B8%A9%E5%9D%91%E7%B3%BB%E5%88%97%E7%AF%87/">
+<link rel="canonical" href="http://example.com/2022/05/05/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C%EF%BC%88%E4%BA%8C%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -47,7 +46,7 @@
   };
 </script>
 
-  <title>Hexo 搭建个人博客系列：踩坑系列篇 | Taotie's Blog</title>
+  <title>图解网络（二） | Taotie's Blog</title>
   
 
 
@@ -167,7 +166,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2017/04/20/Hexo%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E5%88%97%EF%BC%9A%E8%B8%A9%E5%9D%91%E7%B3%BB%E5%88%97%E7%AF%87/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/05/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C%EF%BC%88%E4%BA%8C%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/touxiang.jpg">
@@ -180,7 +179,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hexo 搭建个人博客系列：踩坑系列篇
+          图解网络（二）
         </h1>
 
         <div class="post-meta">
@@ -190,7 +189,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-04-20 18:30:16" itemprop="dateCreated datePublished" datetime="2017-04-20T18:30:16+08:00">2017-04-20</time>
+              <time title="创建时间：2022-05-05 09:23:03" itemprop="dateCreated datePublished" datetime="2022-05-05T09:23:03+08:00">2022-05-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -198,7 +197,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">博客</span></a>
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
                 </span>
             </span>
 
@@ -208,9 +207,9 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
+              <span>1.7k</span>
             </span>
-            <div class="post-description">博客搭建踩坑.</div>
+            <div class="post-description">TCP三次握手和四次挥手；</div>
 
         </div>
       </header>
@@ -221,16 +220,41 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="踩坑1：hexo-d时的config-yml配置"><a href="#踩坑1：hexo-d时的config-yml配置" class="headerlink" title="踩坑1：hexo d时的config.yml配置"></a>踩坑1：hexo d时的config.yml配置</h1><p>hexo d时，站点配置文件里的config.yml，repo应该用git@git…而不是url，不然会报错<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sh">depoly:<br>  <span class="hljs-built_in">type</span>: git<br>  <span class="hljs-comment"># repo: https://gitee.com/qhbb/qhbb</span><br>  repo: git@github.com:xlq246860/xlq246860.github.io.git<br>  branch: master<br></code></pre></td></tr></table></figure></p>
-<h1 id="踩坑2：gitee-pages"><a href="#踩坑2：gitee-pages" class="headerlink" title="踩坑2：gitee pages"></a>踩坑2：gitee pages</h1><p>gitee pages需要实名认证才能开启，所以这次没有选择gitee，而是github进行博客部署。</p>
-<h1 id="踩坑3：github更新"><a href="#踩坑3：github更新" class="headerlink" title="踩坑3：github更新"></a>踩坑3：github更新</h1><p>在hexo d后，需要等待一段时间才能刷新内容。<br>hexo clean清除缓存，hexo g产生静态网页，hexo d上传至仓库。<br>hexo g根据source里的markdown文件产生静态网页，public里的东西每次都会被覆盖。</p>
-<h1 id="踩坑4：上传文件"><a href="#踩坑4：上传文件" class="headerlink" title="踩坑4：上传文件"></a>踩坑4：上传文件</h1><p>上传文件至github时，有两种选择，二选一即可，无需全部都做<br>选择1：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">hexo clean<br>hexo g<br>hexo d<br></code></pre></td></tr></table></figure><br>选择2：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git init //将该文件夹中的文件纳入到Git的版本控制中<br>git add . //将所有的文件添加到Git暂存区<br>git commit -m &quot;此次提交的说明&quot; //将文件提交到本地<br>git remote add origin 你的远程仓库地址 //告诉Git你的Gitee仓库在哪里<br>git push -u origin master //将你本地的文件提交到Gitee仓库的master分支<br></code></pre></td></tr></table></figure></p>
-<h1 id="踩坑5：提交仓库前的配置"><a href="#踩坑5：提交仓库前的配置" class="headerlink" title="踩坑5：提交仓库前的配置"></a>踩坑5：提交仓库前的配置</h1><p>第一次需要配置git提交时的用户名和邮箱：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git config --global user.name &quot;username&quot; //全局配置提交是使用的提交人名<br>git config --global user.email &quot;xxx@mail.com&quot; //全局配置提交人的电子邮箱<br></code></pre></td></tr></table></figure><br>每次提交时候，不需要每次输入用户名和密码，需要在本地生成ssh密钥，在”C:\Users\user.ssh”文件夹下<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">ssh-keygen -t rsa -C &quot;公钥描述&quot;<br></code></pre></td></tr></table></figure><br>github：设置-&gt;SSH公钥，添加刚刚生成的密钥</p>
-<h1 id="踩坑6：换电脑时博客怎么更新"><a href="#踩坑6：换电脑时博客怎么更新" class="headerlink" title="踩坑6：换电脑时博客怎么更新"></a>踩坑6：换电脑时博客怎么更新</h1><p>这是现在的博客最坑的地方，因为github里的code是静态网页，所以下载下来也没用，导致重建了博客，这需要进一步探索迁移问题，目前还没找到解决方案。<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21193762">换电脑，怎么更新博客</a></p>
-<h1 id="踩坑7：Hexo-admin"><a href="#踩坑7：Hexo-admin" class="headerlink" title="踩坑7：Hexo-admin"></a>踩坑7：Hexo-admin</h1><p>admin每次安装好后，点进localhost:4000/admin里，无法编辑文章。报错：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">Function yaml.safeLoad is removed in js-yaml 4. Use yaml.load instead, which is now safe by default。<br></code></pre></td></tr></table></figure>
-<p>原因： yaml.safeLoad已经弃用，用yaml.load代替。</p>
-<p>解决： 根据错误描述，找到 myBlog\node_modules_hexo-admin@2.3.0@hexo-admin\api.js，44行 yaml.safeLoad改为yaml.load<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">var settings = yml.safeLoad(fs.readFileSync(path))<br></code></pre></td></tr></table></figure></p>
+        <h1 id="TCP基本认识"><a href="#TCP基本认识" class="headerlink" title="TCP基本认识"></a>TCP基本认识</h1><h2 id="TCP报文首部格式："><a href="#TCP报文首部格式：" class="headerlink" title="TCP报文首部格式："></a>TCP报文首部格式：</h2><pre><code>源端口号（16位）+目标端口号（16位）
+序列号（32位）
+应答确认号（32位）
+首部长度（4位）+保留（6位）+标志位（6位）+窗口长度（16位）
+校验和（16位）+紧急指针（16位）
+选项（长度可变）
+数据
+</code></pre><p>TCP是面向连接的、可靠的、基于字节流的传输层通信协议。</p>
+<blockquote>
+<p>什么是TCP连接？如何唯一确定一个TCP连接？</p>
+</blockquote>
+<p>scoket (ip+端口) + 序列号 + 窗口大小，用于保证可靠性和流量控制维护的这些状态信息组合称为连接。<br>四元组（源IP+目标IP+源端口+目标端口）唯一确定一个TCP连接。<br>目的地址是通过IP协议指定发向哪个主机；端口是通过TCP协议指定发给哪个进程。</p>
+<h2 id="TCP和UDP的区别？"><a href="#TCP和UDP的区别？" class="headerlink" title="TCP和UDP的区别？"></a>TCP和UDP的区别？</h2><ul>
+<li>连接（面向连接/无连接）</li>
+<li>服务对象（一对一/一对一or多）</li>
+<li>首部开销（20字节，可变长/固定8字节）</li>
+<li>传输方式（基于字节流，无边界/一个包一个包发送）</li>
+<li>分片（MSS tcp分片，少哪个传哪个/ MTU IP分片，少一个重传全部）</li>
+<li>可靠性（序列号+确认号/不可靠）</li>
+<li>流量控制和拥塞控制</li>
+</ul>
+<h1 id="TCP建立连接"><a href="#TCP建立连接" class="headerlink" title="TCP建立连接"></a>TCP建立连接</h1><p>三次握手过程和状态变迁<br>客户端：CLOSED -&gt; SYN_SENT -&gt; ESTABLISHED<br>服务端：CLOSED -&gt; LISTEN -&gt; SYN_RCVD -&gt; ESTABLISHED<br>三次握手过程中，客户端和服务端都会随机初始化序列号，且不包含应用层数据。第三次握手可以携带数据。<br>SYN(客户端) -&gt; SYN+ACK(服务端) -&gt; ACK(客户端；可携带数据)</p>
+<h2 id="三次握手，为什么不是四次或两次。"><a href="#三次握手，为什么不是四次或两次。" class="headerlink" title="三次握手，为什么不是四次或两次。"></a>三次握手，为什么不是四次或两次。</h2><p>两次：无法避免历史连接的建立，造成资源浪费；无法同步双方的序列号。<br>四次：三次就能建立可靠连接，不需要更多通信次数。</p>
+<h2 id="MTU和MSS"><a href="#MTU和MSS" class="headerlink" title="MTU和MSS"></a>MTU和MSS</h2><p>超过MTU，IP分片，所以当有个分片未收到，由于网络层没有超时重传机制，由TCP层负责超时和重传，所以还是一个完整的包交给IP层，然后分片传输。所以整个IP报文的所有分片都要重传。</p>
+<p>TCP协议在建立连接时协商双方的MSS值，TCP层发现数据超过MSS时，则会分片，所以形成的IP包长度不会超过MTU，不用IP分片，当未接收到某一分片，就直接重传该分片即可。</p>
+<h1 id="TCP断开连接"><a href="#TCP断开连接" class="headerlink" title="TCP断开连接"></a>TCP断开连接</h1><p>四次挥手过程和状态迁移<br>客户端：ESTABLISHED -&gt; FIN_WAIT_1 -&gt; FIN_WAIT_2 -&gt; TIME_WAIT(2MSL) -&gt; CLOSED<br>服务端：ESTABLISHED -&gt; CLOSED_WAIT(不再接收数据) -&gt; LAST_ACK -&gt; CLOSED</p>
+<p>主动关闭连接的，才有TIME_WAIT状态。</p>
+<p>为什么是四次，因为服务端收到FIN之后，发送ACK确认，然后需要处理完数据再发送FIN，断开连接。所以ACK和FIN要分开发送。客户端 发送FIN仅表示单方面的断开连接，不再发送数据，但还可以接收数据。</p>
+<h2 id="为什么2MSL"><a href="#为什么2MSL" class="headerlink" title="为什么2MSL?"></a>为什么2MSL?</h2><p>MSL max segment lifetime. 报文最大生存时间，报文在网络上存在的最长时间。<br>但被动关闭连接方没有按时收到ACK，超时重发FIN，然后客户端再发ACK，一来一回，刚好2MSL。</p>
+<blockquote>
+<p>过多TIME_WAIT状态</p>
+</blockquote>
+<p>一个TCP连接至少消耗一个本地端口，端口数有限。（那网站访问数那么多，是怎么做到的？）（因为是客户端主动发起的连接，所以TIME_WAIT状态在客户端，服务端只监听一个端口，把连接交给处理线程，当服务端出现大量TIME_WAIT时，系统资源被占满，线程池也处理不了那么多一直不断的连接了）</p>
+<h2 id="保活机制"><a href="#保活机制" class="headerlink" title="保活机制"></a>保活机制</h2><p>TCP连接无活动，每隔一段时间发送一个探测报文，连续几个报文都没得到响应，则断开连接。</p>
+<h1 id="Socket编程"><a href="#Socket编程" class="headerlink" title="Socket编程"></a>Socket编程</h1><p>客户端：socket       -&gt;              connect() -&gt; write() &lt;- read()<br>服务端：socket -&gt; bind() listen() -&gt; accept() -&gt; read() -&gt; write()<br>connect阻塞(SYN_SENT)，connect返回(ESTABLISHED)<br>bind、listen(LISTEN)，accept阻塞(SYN_RCVD)，accept返回read阻塞(ESTABLISHED)</p>
 
     </div>
 
@@ -254,10 +278,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <!--<a href="/tags/Hexo/" rel="tag">Hexo</a>-->
-              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i>Hexo</a>
-              <!--<a href="/tags/Github/" rel="tag">Github</a>-->
-              <a href="/tags/Github/" rel="tag"><i class="fa fa-tag"></i>Github</a>
+              <!--<a href="/tags/TCP/" rel="tag">TCP</a>-->
+              <a href="/tags/TCP/" rel="tag"><i class="fa fa-tag"></i>TCP</a>
           </div>
 
         
@@ -266,13 +288,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2017/04/18/Hexo%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E5%88%97%EF%BC%9A%E4%B8%BB%E9%A2%98%E7%BE%8E%E5%8C%96%E7%AF%87/" rel="prev" title="Hexo 搭建个人博客系列：主题美化篇">
-      <i class="fa fa-chevron-left"></i> Hexo 搭建个人博客系列：主题美化篇
+    <a href="/2022/05/03/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89/" rel="prev" title="图解网络（一）">
+      <i class="fa fa-chevron-left"></i> 图解网络（一）
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2017/04/22/Hexo-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E5%88%97%EF%BC%9A%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%AF%87/" rel="next" title="Hexo 搭建个人博客系列：后台管理篇">
-      Hexo 搭建个人博客系列：后台管理篇 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -331,7 +350,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B8%A9%E5%9D%911%EF%BC%9Ahexo-d%E6%97%B6%E7%9A%84config-yml%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">踩坑1：hexo d时的config.yml配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B8%A9%E5%9D%912%EF%BC%9Agitee-pages"><span class="nav-number">2.</span> <span class="nav-text">踩坑2：gitee pages</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B8%A9%E5%9D%913%EF%BC%9Agithub%E6%9B%B4%E6%96%B0"><span class="nav-number">3.</span> <span class="nav-text">踩坑3：github更新</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B8%A9%E5%9D%914%EF%BC%9A%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">踩坑4：上传文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B8%A9%E5%9D%915%EF%BC%9A%E6%8F%90%E4%BA%A4%E4%BB%93%E5%BA%93%E5%89%8D%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">踩坑5：提交仓库前的配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B8%A9%E5%9D%916%EF%BC%9A%E6%8D%A2%E7%94%B5%E8%84%91%E6%97%B6%E5%8D%9A%E5%AE%A2%E6%80%8E%E4%B9%88%E6%9B%B4%E6%96%B0"><span class="nav-number">6.</span> <span class="nav-text">踩坑6：换电脑时博客怎么更新</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B8%A9%E5%9D%917%EF%BC%9AHexo-admin"><span class="nav-number">7.</span> <span class="nav-text">踩坑7：Hexo-admin</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">TCP基本认识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP%E6%8A%A5%E6%96%87%E9%A6%96%E9%83%A8%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">TCP报文首部格式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP%E5%92%8CUDP%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">TCP和UDP的区别？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.</span> <span class="nav-text">TCP建立连接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%98%AF%E5%9B%9B%E6%AC%A1%E6%88%96%E4%B8%A4%E6%AC%A1%E3%80%82"><span class="nav-number">2.1.</span> <span class="nav-text">三次握手，为什么不是四次或两次。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MTU%E5%92%8CMSS"><span class="nav-number">2.2.</span> <span class="nav-text">MTU和MSS</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5"><span class="nav-number">3.</span> <span class="nav-text">TCP断开连接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%882MSL"><span class="nav-number">3.1.</span> <span class="nav-text">为什么2MSL?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%9D%E6%B4%BB%E6%9C%BA%E5%88%B6"><span class="nav-number">3.2.</span> <span class="nav-text">保活机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Socket%E7%BC%96%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">Socket编程</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
