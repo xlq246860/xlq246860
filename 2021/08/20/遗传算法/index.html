@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="遗传算法原理和算法收敛的策略.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="遗传算法">
+<meta property="og:url" content="http://example.com/2021/08/20/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Taotie&#39;s Blog">
+<meta property="og:description" content="遗传算法原理和算法收敛的策略.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-20T05:56:07.000Z">
+<meta property="article:modified_time" content="2022-08-03T12:46:36.432Z">
+<meta property="article:author" content="Taotie">
+<meta property="article:tag" content="遗传算法">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/08/20/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>遗传算法 | Taotie's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Taotie's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/20/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+      <meta itemprop="name" content="Taotie">
+      <meta itemprop="description" content="Keep learning.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taotie's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          遗传算法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-20 13:56:07" itemprop="dateCreated datePublished" datetime="2021-08-20T13:56:07+08:00">2021-08-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" itemprop="url" rel="index"><span itemprop="name">数学建模</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <div class="post-description">遗传算法原理和算法收敛的策略.</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>种群是生物进化的基本单位，生物进化的实质是种群基因频率的改变。<br>基因重组、基因突变、自然选择和隔离是物种形成的三个基本环节，通过他们的综合作用，种群产生分化，最终导致新物种的形成。<br><strong>基因突变和基因重组</strong>是生物进化的原材料，<strong>自然选择</strong>使物种基因频率定向改变并决定生物进化的方向，隔离是新物种形成的必要条件。</p>
+<p>遗传算法核心概念是基于进化论思想的自然选择、交叉、变异过程。GA的优化对象是染色体，染色体携带的关键信息称为遗传信息，GA根据适应度函数对遗传信息进行编码，染色体组称为种群。<br>进化过程中，种群里适应度高的染色体有更高的纪律进行繁殖，通过交叉等位基因、基因突变和选择产生子代种群，不断迭代，直到最优解产生。<br>GA是随机搜索的全局优化算法。需要注意算法的收敛精度和收敛速度。得到最优解避免陷入局部最优，又要提高收敛速度。</p>
+<h1 id="遗传算法"><a href="#遗传算法" class="headerlink" title="遗传算法"></a>遗传算法</h1><ol>
+<li>编码</li>
+<li>产生随机种群</li>
+<li>计算适应度</li>
+<li>选择</li>
+<li>交叉</li>
+<li>变异</li>
+<li>得到新种群，迭代，回到步骤3，直至到达迭代次数或满足条件</li>
+</ol>
+<h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><p>定义种群或群体为所有编码后的染色体集合，表征每个个体都是其相应的染色体。<br>编码分为：二进制编码、浮点编码。<br>例：某一参数的范围(L, U)，使用长度为k的二进制编码表示该参数，则有2^k种不同编码。</p>
+<h2 id="解码"><a href="#解码" class="headerlink" title="解码"></a>解码</h2><p>如：解码就是将不直观的二进制数据串还原成十进制。<br>解码和编码可以对应为生物的基因型和表现型。</p>
+<h2 id="交叉"><a href="#交叉" class="headerlink" title="交叉"></a>交叉</h2><p>首先随机产生一个或多个交叉点位置，然后两个个体在交叉点互换部分基因码，形成两个子个体。<br>交叉概率：参加交叉的染色体数量</p>
+<h2 id="变异"><a href="#变异" class="headerlink" title="变异"></a>变异</h2><p>使用基本位进行基因突变，为避免在算法迭代后期出现种群过早收敛，种群多样性。对于二进制编码即0变1，1变0.<br>变异概率：确定变异的基因个数和位置。</p>
+<h2 id="个体适应度评估"><a href="#个体适应度评估" class="headerlink" title="个体适应度评估"></a>个体适应度评估</h2><p>遗传算法依照与个体适应度成正比的几率决定当前种群中各个个体遗传到下一代群体的机会。个体适应度大的更容易遗传到下一代。<br>目标函数最大值问题可以直接把目标函数作为检测个体适应度大小的函数。</p>
+<h2 id="选择"><a href="#选择" class="headerlink" title="选择"></a>选择</h2><p>选择算子：选择个体数量和确定哪些个体被选择。要避免选择的全是适应度高的个体导致发生早期收敛，停留在局部最优上。对适应度高的个体进行控制，降低与其他适应度的差异。</p>
+<h1 id="算法参数设计原则"><a href="#算法参数设计原则" class="headerlink" title="算法参数设计原则"></a>算法参数设计原则</h1><p>收敛问题：既不能过早收敛，也不能难以收敛。</p>
+<p>种群规模：过大，难以收敛。过小，基因缺乏多样性。<br>变异概率：过大造成高阶模式被破坏的概率增大（是不能朝着确定的方向走？）；过小时，种群多样性下降过快。<br>交叉概率：过大时破坏已有的有利模式，随机性增大，容易错失最优个体。太小不能有效更新种群。<br>进化代数：太大，种群已经收敛了，后续进化意义不大；太小则不容易收敛。</p>
+<h2 id="自适应收敛"><a href="#自适应收敛" class="headerlink" title="自适应收敛"></a>自适应收敛</h2><p>矛盾：<br>提高收敛精度以增加进化时间为代价；<br>加快收敛速度，导致收敛精度下降。</p>
+<p>引入 <strong>变异算子的自适应校正</strong>，设计一种低时间复杂度的种群自适应收敛的快速遗传算法。<br>理想的变异算子：其随机变异幅度的平均值应与迭代次数成反比，同时保证携带的遗传信息在取值范围内。通过引入迭代次数，抑制收敛后期全解空间变异的发散特性，同时也保证变异操作的一定随机性，抑制早熟收敛。</p>
+
+    </div>
+
+    
+    
+    
+
+    
+       <div>
+         <div>
+  
+    <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+      <span>-------- 本文结束 </span>
+      <i class="fa fa-paw"></i>
+      <span> 感谢阅读 --------</span>
+    </div>
+  
+</div>
+       </div>
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <!--<a href="/tags/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/" rel="tag">遗传算法</a>-->
+              <a href="/tags/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i>遗传算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/19/%E6%95%B4%E6%95%B0%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98/" rel="prev" title="整数线性规划问题">
+      <i class="fa fa-chevron-left"></i> 整数线性规划问题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/08/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92%E7%AC%AC%E4%B8%89%E5%8D%81%E5%85%AD%E5%A4%A9/" rel="next" title="学习计划第三十六天">
+      学习计划第三十六天 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">遗传算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E7%A0%81"><span class="nav-number">1.1.</span> <span class="nav-text">编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">解码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E5%8F%89"><span class="nav-number">1.3.</span> <span class="nav-text">交叉</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E5%BC%82"><span class="nav-number">1.4.</span> <span class="nav-text">变异</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AA%E4%BD%93%E9%80%82%E5%BA%94%E5%BA%A6%E8%AF%84%E4%BC%B0"><span class="nav-number">1.5.</span> <span class="nav-text">个体适应度评估</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9"><span class="nav-number">1.6.</span> <span class="nav-text">选择</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%8F%82%E6%95%B0%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="nav-number">2.</span> <span class="nav-text">算法参数设计原则</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E9%80%82%E5%BA%94%E6%94%B6%E6%95%9B"><span class="nav-number">2.1.</span> <span class="nav-text">自适应收敛</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Taotie"
+      src="/images/touxiang.jpg">
+  <p class="site-author-name" itemprop="name">Taotie</p>
+  <div class="site-description" itemprop="description">Keep learning.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/qhbb" title="https:&#x2F;&#x2F;gitee.com&#x2F;qhbb" rel="noopener" target="_blank">Taotie</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taotie</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
